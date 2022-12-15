@@ -16,6 +16,7 @@ public struct ConfigurationsFeature: ReducerProtocol {
     }
     
     public struct State: Equatable {
+        public var title: String = "Configurations"
         public init() {
             
         }

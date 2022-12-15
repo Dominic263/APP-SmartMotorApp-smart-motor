@@ -16,9 +16,8 @@ public struct RunFeature: ReducerProtocol {
     }
     
     public struct State: Equatable {
-        public init() {
-            
-        }
+        public var title: String = "Run"
+        public init() { }
     }
     
     public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {

@@ -36,7 +36,7 @@ let package = Package(
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", .upToNextMajor(from: "0.47.2")),
-        .package(url: "https://github.com/swift-server-community/mqtt-nio.git", from: "2.7.0")
+        .package(url: "https://github.com/sroebert/mqtt-nio.git", from: "2.8.1")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -45,11 +45,9 @@ let package = Package(
             name: "UI",
             dependencies: [
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
-                "AppCore",
+                "Train",
                 "Run",
-                "Configurations",
-                "Train"
-                
+                "Configurations"
             ]
         ),
         .target(
@@ -70,6 +68,7 @@ let package = Package(
             name: "Train",
             dependencies: [
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+                "MQTTCore",
                 
             ]
         ),
@@ -79,9 +78,8 @@ let package = Package(
                 .product(
                     name: "ComposableArchitecture",
                     package: "swift-composable-architecture"),
-                "Run",
-                "Configurations",
-                "Train"
+                "UI"
+                
             ]
         ),
         .target(

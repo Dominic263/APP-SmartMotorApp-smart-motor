@@ -19,11 +19,13 @@ public struct ConfigurationsView: View {
     public var body: some View {
         WithViewStore(self.store, observe: {$0}) { viewstore in
             VStack {
+                Text(viewstore.title)
+                    .font(.title)
                 Spacer()
                 HStack {
                     Spacer()
                     // MARK - This View will contain charts and other interesting views showing how the smart motor behaves in run mode
-                    Text("Config Feature.")
+                    Text("")
                         .font(.title)
                     
                     Spacer()

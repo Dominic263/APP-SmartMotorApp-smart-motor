@@ -20,9 +20,9 @@ public struct MQTTView: View {
     
     public var body: some View {
         WithViewStore(self.store, observe: {$0}) { viewstore in
-            
-            VStack{
+            VStack {
                 Text("Connect to Client")
+                
                 Form {
                     
                     Section {
@@ -32,8 +32,11 @@ public struct MQTTView: View {
                                     send: MQTTManager.Action.changeHost
                                   )
                         )
-                        .autocapitalization(.none)
+                        //.autocapitalization(.none)
+                        //.autocorrectionDisabled()
                     }
+                    
+                    
                     
                     Section {
                         TextField("Enter Port",
@@ -42,23 +45,30 @@ public struct MQTTView: View {
                                     send: MQTTManager.Action.changePort
                                   )
                         )
-                        .autocapitalization(.none)
+                       /// .autocapitalization(.none)
+                       // .autocorrectionDisabled()
                     }
                     
+                    
                 }
+                Spacer()
+                Section {
+                    Text("Dialog: " + viewstore.alertString) //To be changed to a dialog box later
+                }
+                Spacer()
                 
-                Button(action: {viewstore.send(.connectToBroker)}) {
+                Button(action: { viewstore.send(.connectToBroker)}) {
                     VStack{
                         Image(systemName: "app.connected.to.app.below.fill")
                         Text("connect")
                     }
                 }
-
-            }
-            
+            }.autocapitalization(.none)
+                .autocorrectionDisabled()
         }
     }
 }
+
 
 struct MQTTView_Previews: PreviewProvider {
     static var previews: some View {

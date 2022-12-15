@@ -10,6 +10,7 @@ import Run
 import Configurations
 import Train
 
+
 //MARK - Tabs in the app
 public enum Tab {
     case configurations
@@ -29,28 +30,29 @@ public struct AppFeature: ReducerProtocol {
         public var configState: ConfigurationsFeature.State
         public var trainState: TrainFeature.State
         
-        public init(tab: Tab = .train, runState: RunFeature.State = .init(), configState: ConfigurationsFeature.State = .init(), trainState: TrainFeature.State = .init()) {
+        public init(tab: Tab = .train, runState: RunFeature.State = .init(), configState: ConfigurationsFeature.State = .init(), trainState: TrainFeature.State = .init() ) {
             self.selectedTab = tab
             self.runState = runState
             self.configState = configState
             self.trainState = trainState
+           
         }
     }
     
     public enum Action: Equatable {
-        case none
+        
         case changeTab(Tab)
         case run(RunFeature.Action)
         case config(ConfigurationsFeature.Action)
         case train(TrainFeature.Action)
+        
     }
     
     //Dependencies go here
     public var body: some ReducerProtocol<State, Action> {
         Reduce { state, action in
             switch action {
-            case .none:
-                return .none
+           
             case .changeTab(let newTab):
                 state.selectedTab = newTab
                 return .none
@@ -59,8 +61,15 @@ public struct AppFeature: ReducerProtocol {
             case .config(_):
                 return .none
              
-            case .train(_):
+            case .train(.connect):
                 return .none
+            
+            case .train(.MQTTAction(_)):
+                return .none
+            case .train(.connectionComplete):
+                return .none
+            case .train(.check):
+                <#code#>
             }
         }
         
@@ -74,5 +83,6 @@ public struct AppFeature: ReducerProtocol {
         Scope(state: \.trainState, action: /Action.train) {
             TrainFeature()
         }
+        
     }
 }
